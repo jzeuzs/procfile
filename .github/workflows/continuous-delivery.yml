@@ -9,10 +9,13 @@ jobs:
   release_please:
     name: Release Please
     runs-on: ubuntu-latest
+    permissions: write-all
     if: github.repository == 'devtomio/procfile'
+
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
+
     steps:
       - uses: google-github-actions/release-please-action@41b6423541a7b9ee9e1aca6048bc679f61756b1c # tag=v3
         id: release
