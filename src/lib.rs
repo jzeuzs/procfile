@@ -132,7 +132,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_one_process() {
+    fn one_process() {
         let procfile = "web: node a.js --option-1 --option-2";
         let parsed = parse(procfile).unwrap();
 
@@ -145,7 +145,7 @@ mod tests {
     }
 
     #[test]
-    fn test_multiple_process() {
+    fn multiple_process() {
         let procfile = "\
 web: py b.py --my-option
 worker: gcc c.c    
@@ -165,7 +165,7 @@ worker: gcc c.c
     }
 
     #[test]
-    fn test_no_process() {
+    fn no_process() {
         let procfile = "";
         let parsed = parse(procfile).unwrap();
 
@@ -173,10 +173,19 @@ worker: gcc c.c
     }
 
     #[test]
-    fn test_invalid_process() {
+    fn invalid_process() {
         let procfile = "hedhehiidhodhidhiodiedhidwhio";
         let parsed = parse(procfile).unwrap();
 
         assert!(parsed.is_empty());
+    }
+
+    #[test]
+    fn test_display() {
+        let procfile = "web: node index.mjs --verbose";
+        let parsed = parse(procfile).unwrap();
+        let web_process = &*parsed.get("web").unwrap();
+
+        assert_eq!("node index.mjs --verbose", &format!("{}", web_process));
     }
 }
