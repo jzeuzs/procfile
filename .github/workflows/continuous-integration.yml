@@ -1,0 +1,111 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    name: Unit Tests
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        name:
+          - Stable
+          - Beta
+          - Nightly
+          - MacOS
+          - Windows
+        
+        include:
+          - name: Stable
+            toolchain: stable
+            os: ubuntu-latest
+
+          - name: Beta
+            toolchain: beta
+            os: ubuntu-latest
+
+          - name: Nightly
+            toolchain: nightly
+            os: ubuntu-latest
+
+          - name: MacOS
+            toolchain: stable
+            os: macOS-latest
+
+          - name: Windows
+            toolchain: stable
+            os: windows-latest
+
+    steps:
+      - name: Checkout the Repository
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # tag=v1
+        with:
+          profile: minimal
+          toolchain: ${{ matrix.toolchain }}
+          override: true
+
+      - name: Cache dependencies
+        uses: Swatinem/rust-cache@v1
+
+      - name: Install Nextest
+        uses: taiki-e/install-action@nextest
+
+      - name: Run Tests
+        run: cargo nextest run
+
+  fmt:
+    name: Rustfmt
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the Repository
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # tag=v1
+        with:
+          profile: minimal
+          toolchain: nightly
+          override: true
+
+      - name: Cache dependencies
+        uses: Swatinem/rust-cache@v1
+
+      - name: Install rustfmt
+        run: rustup component add rustfmt
+
+      - name: Run rustfmt
+        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # tag=v1
+        with:
+          command: fmt
+          args: --all -- --check
+
+  clippy:
+    name: Clippy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the Repository
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # tag=v1
+        with:
+          profile: minimal
+          toolchain: nightly
+          override: true
+      
+      - name: Cache dependencies
+        uses: Swatinem/rust-cache@v1
+
+      - name: Install clippy
+        run: rustup component add clippy
+
+      - name: Run clippy
+        run: cargo clippy -- -D warnings

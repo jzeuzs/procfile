@@ -1,0 +1,37 @@
+[package]
+name = "procfile"
+version = "0.1.0"
+description = "Procfile parser for Rust"
+keywords = ["procfile", "parser", "rust", "heroku"]
+categories = ["config", "data-structures", "parsing", "parser-implementations"]
+repository = "https://github.com/devtomio/procfile"
+documentation = "https://docs.rs/procfile"
+authors = ["Tomio <mail@tomio.fun>"]
+readme = "README.md"
+license = "MIT/Apache-2.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+regex = "1.5.5"
+lazy_static = "1.4.0"
+dashmap = "5.3.3"
+cfg-if = "1.0.0"
+
+[dependencies.rayon]
+version = "1.5.3"
+optional = true
+
+[dependencies.serde]
+version = "1.0.137"
+features = ["derive"]
+optional = true
+
+[features]
+default = ["rayon"]
+rayon = ["dep:rayon", "dashmap/rayon"]
+serde = ["dep:serde", "dashmap/serde"]
+
+[package.metadata.docs.rs]
+features = ["serde", "rayon"]
