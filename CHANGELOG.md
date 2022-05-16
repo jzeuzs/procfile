@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/devtomio/procfile/compare/v0.1.0...v0.2.0) (2022-05-16)
+
+
+### Features
+
+* implement `Display` for `Process` ([cdbe9ba](https://github.com/devtomio/procfile/commit/cdbe9ba36f2ddc020cf3586ed46583847ac3e6b0))
+
 ## 0.1.0 (2022-05-16)
 
 
