@@ -14,7 +14,7 @@
 
 ```toml
 [dependencies]
-procfile = "0.1"
+procfile = "0.2"
 ```
 
 The code:
@@ -27,7 +27,7 @@ fn main() {
     let parsed = procfile::parse(procfile).expect("Failed parsing procfile");
     let web = parsed.get("web").expect("Failed getting web process");
 
-    println!("{:?}", web);
+    println!("{}", web);
 }
 ```
 

@@ -1,6 +1,6 @@
 [package]
 name = "procfile"
-version = "0.1.0"
+version = "0.2.0"
 description = "Procfile parser for Rust"
 keywords = ["procfile", "parser", "rust", "heroku"]
 categories = ["config", "data-structures", "parsing", "parser-implementations"]
