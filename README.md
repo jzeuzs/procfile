@@ -19,7 +19,7 @@ procfile = "0.1"
 
 The code:
 
-```rs
+```rust
 use procfile;
 
 fn main() {

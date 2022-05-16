@@ -4,7 +4,7 @@
 //!
 //! ## Examples
 //!
-//! ```rs
+//! ```rust
 //! let my_procfile = "web: cargo run";
 //! let parsed = procfile::parse(my_procfile).expect("Failed parsing procfile");
 //! let web_process = parsed.get("web").expect("Failed getting web process");
@@ -12,6 +12,8 @@
 //! assert_eq!("cargo", web_process.command);
 //! assert_eq!(vec!["run"], web_process.options);
 //! ```
+
+use std::fmt::{Display, Formatter, Result as FmtResult};
 
 use cfg_if::cfg_if;
 use dashmap::DashMap;
@@ -27,7 +29,7 @@ pub type Result<T, E = Error> = std::result::Result<T, E>;
 ///
 /// # Examples
 ///
-/// ```rs
+/// ```rust
 /// use procfile;
 ///
 /// let my_procfile = "web: cargo run";
@@ -116,6 +118,12 @@ cfg_if! {
             /// The command options. (e.g. `["build", "--release"]`)
             pub options: Vec<&'a str>,
         }
+    }
+}
+
+impl<'a> Display for Process<'a> {
+    fn fmt(&self, f: &mut Formatter) -> FmtResult {
+        write!(f, "{} {}", self.command, self.options.join(" "))
     }
 }
 
