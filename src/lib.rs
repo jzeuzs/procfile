@@ -1,14 +1,14 @@
 //! # procfile
-//! 
+//!
 //! A rust library for parsing Procfile(s).
-//! 
+//!
 //! ## Examples
-//! 
+//!
 //! ```rs
 //! let my_procfile = "web: cargo run";
 //! let parsed = procfile::parse(my_procfile).expect("Failed parsing procfile");
 //! let web_process = parsed.get("web").expect("Failed getting web process");
-//! 
+//!
 //! assert_eq!("cargo", web_process.command);
 //! assert_eq!(vec!["run"], web_process.options);
 //! ```
@@ -24,22 +24,22 @@ pub type Error = Box<dyn std::error::Error + Send + Sync>;
 pub type Result<T, E = Error> = std::result::Result<T, E>;
 
 /// Parses a Procfile string.
-/// 
+///
 /// # Examples
-/// 
+///
 /// ```rs
 /// use procfile;
-/// 
+///
 /// let my_procfile = "web: cargo run";
 /// let parsed = procfile::parse(my_procfile).expect("Failed parsing procfile");
 /// let web_process = parsed.get("web").expect("Failed getting web process");
-/// 
+///
 /// assert_eq!("cargo", web_process.command);
 /// assert_eq!(vec!["run"], web_process.options);
 /// ```
 ///
 /// # Errors
-/// 
+///
 /// - When building the regex fails
 /// - When either the command, options, and the process name don't exist but the regex matched
 pub fn parse<'a>(content: &'a str) -> Result<DashMap<&'a str, Process>> {
