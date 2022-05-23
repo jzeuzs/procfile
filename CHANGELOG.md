@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.1](https://github.com/devtomio/procfile/compare/v0.2.0...v0.2.1) (2022-05-23)
+
+
+### Bug Fixes
+
+* **deps:** update rust crate regex to 1.5.6 ([#6](https://github.com/devtomio/procfile/issues/6)) ([659b687](https://github.com/devtomio/procfile/commit/659b687aed3d5cfc17d4d802410a3ee685c7b008))
+
 ## [0.2.0](https://github.com/devtomio/procfile/compare/v0.1.0...v0.2.0) (2022-05-16)
 
 
