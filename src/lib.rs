@@ -47,7 +47,7 @@ pub type Result<T, E = Error> = std::result::Result<T, E>;
 pub fn parse<'a>(content: &'a str) -> Result<DashMap<&'a str, Process>> {
     lazy_static! {
         static ref REGEX: Regex =
-            Regex::new(r"^([A-Za-z0-9_]+):\s*(.+)$").expect("Failed building regex");
+            Regex::new(r"^([A-Za-z0-9_-]+):\s*(.+)$").expect("Failed building regex");
     }
 
     let map: DashMap<&'a str, Process> = DashMap::new();
