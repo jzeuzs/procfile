@@ -30,7 +30,7 @@ jobs:
     if: ${{ needs.release_please.outputs.release_created == 'true' }}
     steps:
       - name: Checkout the Repository
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
 
       - name: Install Rust
         uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # tag=v1.0.7
