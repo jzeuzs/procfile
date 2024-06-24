@@ -16,7 +16,7 @@ edition = "2021"
 [dependencies]
 regex = "1.5.6"
 lazy_static = "1.4.0"
-dashmap = "5.3.4"
+dashmap = "6.0.0"
 cfg-if = "1.0.0"
 
 [dependencies.rayon]
