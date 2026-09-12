@@ -56,7 +56,7 @@ jobs:
         uses: Swatinem/rust-cache@v1
 
       - name: Install Nextest
-        uses: taiki-e/install-action@nextest
+        uses: taiki-e/install-action@4dc1969decfa71b34f25aa7f3dd4656654d9ad1e # nextest
 
       - name: Run Tests
         run: cargo nextest run
